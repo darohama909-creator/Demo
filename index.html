@@ -1,2 +1,124 @@
-<h1>Hello World!</h1>
-<p>ئەمە تاقیکاریەکەی منە.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo Wallet Connect</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 30px;
+    }
+    h1 { color: #333; }
+    button {
+      padding: 10px 18px;
+      border: none;
+      background: #4caf50;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover { background: #45a049; }
+    .wallet-list {
+      display: none;
+      margin-top: 20px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .wallet {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid #ccc;
+      margin: 8px 0;
+      border-radius: 5px;
+      cursor: pointer;
+      background: #fafafa;
+    }
+    .wallet:hover { background: #f0f0f0; }
+    .wallet img {
+      width: 28px; height: 28px;
+      margin-right: 10px;
+    }
+    .popup {
+      margin-top: 20px;
+      border: 1px solid #ddd;
+      padding: 15px;
+      width: 350px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 6px;
+      background: #fafafa;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px; margin-top: 10px;
+    }
+    .grid input {
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Demo Wallet Claim</h1>
+  <button onclick="showWallets()">Claim Now</button>
+
+  <div id="wallets" class="wallet-list">
+    <div class="wallet" onclick="redirectWallet('https://metamask.io/')">
+      <img src="https://cryptologos.cc/logos/metamask-fox-logo.png" alt="MetaMask">
+      MetaMask
+    </div>
+    <div class="wallet" onclick="redirectWallet('https://www.coinbase.com/wallet')">
+      <img src="https://cryptologos.cc/logos/coinbase-coin-logo.png" alt="Coinbase">
+      Coinbase Wallet
+    </div>
+    <div class="wallet" onclick="redirectWallet('https://trustwallet.com/')">
+      <img src="https://cryptologos.cc/logos/trust-wallet-logo.png" alt="TrustWallet">
+      TrustWallet
+    </div>
+    <div class="wallet" onclick="redirectWallet('https://phantom.app/')">
+      <img src="https://cryptologos.cc/logos/phantom-pac-logo.png" alt="Phantom">
+      Phantom
+    </div>
+    <div class="wallet" onclick="redirectWallet('https://walletconnect.com/')">
+      <img src="https://cryptologos.cc/logos/walletconnect-logo.png" alt="WalletConnect">
+      WalletConnect
+    </div>
+  </div>
+
+  <div id="popup"></div>
+
+  <script>
+    function showWallets() {
+      document.getElementById("wallets").style.display = "block";
+    }
+
+    function redirectWallet(url) {
+      window.open(url, "_blank"); // پەیجی فەرمی واڵێتەکە دەکرێتەوە
+      showSeedDemo();
+    }
+
+    function showSeedDemo() {
+      let inputs = "";
+      for (let i = 1; i <= 12; i++) {
+        inputs += "<input type='text' placeholder='" + i + "'>";
+      }
+      document.getElementById("popup").innerHTML =
+        "<div class='popup'><h3>Demo Seed Phrase (Fake)</h3>" +
+        "<div class='grid'>" + inputs + "</div>" +
+        "<button onclick='submitSeed()'>Confirm</button></div>";
+    }
+
+    function submitSeed() {
+      document.getElementById("popup").innerHTML =
+        "<div class='popup'><p>✅ Demo Completed! (No real data collected)</p></div>";
+    }
+  </script>
+</body>
+</html>

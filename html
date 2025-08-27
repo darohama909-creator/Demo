@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ku">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo Wallet Connect</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 300px;
+    }
+    button {
+      padding: 12px 20px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover { background: #45a049; }
+    p { margin-top: 15px; color: #333; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>🔗 Demo Wallet Connect</h2>
+    <button id="connectBtn">Connect Wallet</button>
+    <p id="status">Wallet address will appear here…</p>
+  </div>
+
+  <script>
+    const connectBtn = document.getElementById("connectBtn");
+    const status = document.getElementById("status");
+
+    async function connectWallet() {
+      if (typeof window.ethereum === "undefined") {
+        status.textContent = "🚨 تکایە MetaMask یان واڵێتێکی تر لە براوزەر دابمەزرێنە.";
+        return;
+      }
+      try {
+        const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+        status.textContent = "👛 Wallet Address: " + accounts[0];
+      } catch (err) {
+        status.textContent = "❌ هەڵە: " + err.message;
+      }
+    }
+
+    connectBtn.addEventListener("click", connectWallet);
+  </script>
+</body>
+</html>
